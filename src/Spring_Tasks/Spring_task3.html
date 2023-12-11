@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .converter-container {
+            display: flex;
+            box-shadow: 0px 1px 4px 6px rgba(0, 0, 0, 0.2);
+            
+        }
+
+        .currency-box {
+            margin: 10px;
+            padding: 10px;
+            font-weight: bold;
+            text-align: left;
+        }
+        input {
+          height: 36px;
+          width: 200px;
+          font-size: 17px;
+        }
+        select {
+          height: 40px;
+          width: 100px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="converter-container">
+        <div class="currency-box">
+            <p>Введите сумму</p>
+            <div>
+                <input type="number" id="amount" placeholder="Enter amount">
+                <select id="fromCurrency">
+                    <option value="KZT">KZT</option>
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="currency-box">
+            <p>KZT (tenge)</p>
+            <div><input type="number" id="toKZT" disabled></div>
+        </div>
+
+        <div class="currency-box">
+            <p>USD (dollar)</p>
+            <div><input type="number" id="toUSD" disabled></div>
+        </div>
+
+        <div class="currency-box">
+            <p>EUR (euro)</p>
+            <div><input type="number" id="toEUR" disabled></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("amount").addEventListener("input", convertCurrencies);
+        document.getElementById("fromCurrency").addEventListener("change", convertCurrencies);
+
+        function convertCurrencies() {
+            const amount = document.getElementById("amount").value;
+            const fromCurrency = document.getElementById("fromCurrency").value;
+
+            // Replace with your own conversion rates
+            const rates = {
+                KZT: 1,
+                USD: 0.0023,
+                EUR: 0.002
+            };
+
+            document.getElementById("toKZT").value = (amount * rates.KZT).toFixed(2);
+            document.getElementById("toUSD").value = (amount * rates.USD).toFixed(2);
+            document.getElementById("toEUR").value = (amount * rates.EUR).toFixed(2);
+        }
+    </script>
+</body>
+</html>
